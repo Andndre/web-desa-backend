@@ -19,7 +19,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
         return response()->json($user, 200);
     }
@@ -43,7 +43,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -61,9 +61,9 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!$user) {
-            return response()->json(['message' => 'User not found'], 404);
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
         }
         $user->delete();
-        return response()->json(['message' => 'User deleted successfully'], 200);
+        return response()->json(['message' => 'User berhasil dihapus'], 200);
     }
 }
