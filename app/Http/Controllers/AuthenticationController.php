@@ -49,6 +49,13 @@ class AuthenticationController extends Controller
         } catch (Throwable) {
             return response(['message' => 'Terjadi Kesalahan'], 401);
         }
+    }
 
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json([
+            'message' => 'logout success'
+        ]);
     }
 }

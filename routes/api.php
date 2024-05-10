@@ -11,6 +11,8 @@ Route::post('/register', [AuthenticationController::class, 'register']);
 
 // Protected Routes with Sanctum Middleware
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/logout', [AuthenticationController::class, 'logout']);
+
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
