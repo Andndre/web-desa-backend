@@ -15,7 +15,7 @@ class AuthenticationController extends Controller
                 'name' => ['required', 'string'],
                 'email' => ['required', 'email', 'unique:users'],
                 'password' => ['required', 'min:6'],
-                
+
             ]);
             $user = User::create($data);
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -27,7 +27,7 @@ class AuthenticationController extends Controller
             return response(['message' => 'Terjadi Kesalahan'], 401);
         }
     }
-    
+
     public function login(Request $request) {
         try {
             $data = $request->validate([
@@ -35,13 +35,13 @@ class AuthenticationController extends Controller
                 'password' => ['required', 'min:6'],
             ]);
             $user = User::where('email', $data['email'])->first();
-            
+
             if (!Hash::check($data['password'], $user->password)) {
                 return response(['message' => 'Password Invalid!'], 401);
             }
-        
+
             $token = $user->createToken('auth_token')->plainTextToken;
-        
+
             return [
                 'user' => $user,
                 'token' => $token
@@ -49,7 +49,6 @@ class AuthenticationController extends Controller
         } catch (Throwable) {
             return response(['message' => 'Terjadi Kesalahan'], 401);
         }
-        
-    }
 
+    }
 }
