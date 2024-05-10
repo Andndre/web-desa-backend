@@ -5,16 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    
-
-        
-
     public function index()
     {
         $users = User::all();
@@ -53,7 +47,7 @@ class UserController extends Controller
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users,email,' . $user->id, 
+            'email' => 'required|string|email|unique:users,email,' . $user->id,
         ]);
 
         if ($validator->fails()) {
